@@ -4,7 +4,7 @@
 # 1) 라이브러리 임포트
 import os, json, sqlite3
 import streamlit as st
-import fitz  # PyMuPDF
+import pymupdf  # PyMuPDF
 
 from langchain_community.retrievers import BM25Retriever
 from langchain_community.vectorstores import FAISS
@@ -86,7 +86,7 @@ def generate_with_llm(llm: ChatOpenAI, prompt: str) -> str:
 
 # 9) PDF 텍스트 추출
 def extract_text_from_pdf(file) -> str:
-    doc = fitz.open(stream=file.read(), filetype="pdf")
+    doc = pymupdf.open(stream=file.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
